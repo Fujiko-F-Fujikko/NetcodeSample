@@ -1,0 +1,63 @@
+# Unity用 .gitignore テンプレート
+# ビルド成果物
+[Bb]in/
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# ユーザー設定
+UserSettings/
+
+# Auto-generated VS/MD/VSCode files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+
+# Unity Asset/Package管理
+/[Aa]ssets/**/*.asset
+/[Aa]ssets/**/*.asset.meta
+/[Aa]ssets/**/*.meta
+/[Pp]ackages/
+/[Pp]ackageCache/
+/[Pp]ackages-lock.json
+
+# シーンバックアップ
+*.bak
+*.backup
+
+# Crash/Debug/Profiler
+*.stacktrace
+*.log
+*.dmp
+*.crash
+*.swp
+*.swo
+*.orig
+*.diff
+
+# Burst Compiler
+[Bb]urstCache/
+NetcodeSample_BurstDebugInformation_DoNotShip/
+
+# その他
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
