@@ -33,9 +33,8 @@ UserSettings/
 /[Aa]ssets/**/*.asset
 /[Aa]ssets/**/*.asset.meta
 /[Aa]ssets/**/*.meta
-/[Pp]ackages/
 /[Pp]ackageCache/
-/[Pp]ackages-lock.json
+Packages/[Pp]ackages-lock.json
 
 # シーンバックアップ
 *.bak
