@@ -184,7 +184,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: d29e951ce55a0094c913b96d26f821c0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -240,7 +240,6 @@ GameObject:
   m_Component:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
-  - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   m_Layer: 0
   m_Name: SpectatorCamera
@@ -249,14 +248,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &330585544
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
 --- !u!20 &330585545
 Camera:
   m_ObjectHideFlags: 0
@@ -553,6 +544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223334676}
   - component: {fileID: 1223334677}
+  - component: {fileID: 1223334678}
   m_Layer: 0
   m_Name: SpectatorRig
   m_TagString: Untagged
@@ -585,11 +577,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1223334675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cda63c1f3bd6cb43a9d9586598fe339, type: 3}
+  m_Script: {fileID: 11500000, guid: cc9b2c9472e527b439ede98f20105028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  spectatorCamera: {fileID: 0}
-  spectatorAudio: {fileID: 0}
+  spectatorCamera: {fileID: 330585545}
+  spectatorAudio: {fileID: 1223334678}
+--- !u!81 &1223334678
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223334675}
+  m_Enabled: 1
 --- !u!1 &1617726772
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1617726772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27ba850f160a9b047ad3f072a979a612, type: 3}
+  m_Script: {fileID: 11500000, guid: a175b38427add3a4598d2ebb2c0afc72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
   address: 127.0.0.1
@@ -686,10 +686,10 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1617726776}
-    PlayerPrefab: {fileID: 3257629882324441507, guid: 532f464e29285c5469ddc27a63dd7358, type: 3}
+    PlayerPrefab: {fileID: 3257629882324441507, guid: 1c9468deb68900a49a871a6448d2e8b2, type: 3}
     Prefabs:
       NetworkPrefabsLists:
-      - {fileID: 11400000, guid: d8cc90133e9bb51409a9cc4e6ec6af10, type: 2}
+      - {fileID: 11400000, guid: 3e89c8806c4c0804c90b006b79b760dd, type: 2}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0

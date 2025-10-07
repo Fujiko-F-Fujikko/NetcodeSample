@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 1811235330029516938}
   - component: {fileID: 2078696540475461435}
   - component: {fileID: 3991798219389118461}
-  - component: {fileID: 127988365950485041}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -79,7 +78,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 93f8affe72fdb454fb3aaef810c38da7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,7 +121,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &6984227217591160232
@@ -149,7 +148,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5178211107745159104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1430446928
+  GlobalObjectIdHash: 2852716224
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -230,7 +229,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3257629882324441507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff9036f73837833419cfbf8fd4032997, type: 3}
+  m_Script: {fileID: 11500000, guid: 85d06bb494c813c47854d77b0a31a6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
   ShowTopMostFoldoutHeaderGroup: 1
@@ -244,7 +243,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3257629882324441507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7881135f1d187b468da7e91b937a004, type: 3}
+  m_Script: {fileID: 11500000, guid: 64839a00b2f676444aef5fe0f1660065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
   ShowTopMostFoldoutHeaderGroup: 1
@@ -260,7 +259,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3257629882324441507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3112b8c261e09f348bab232e9f5f5ee3, type: 3}
+  m_Script: {fileID: 11500000, guid: 5372b647c61f5884d9f307b08fb9f61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
   ShowTopMostFoldoutHeaderGroup: 1
@@ -308,13 +307,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3257629882324441507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a8928e03b55db8498dc7ceea54f2f50, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dd9e8942d67fe343bef4b86fc9a9069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
   ShowTopMostFoldoutHeaderGroup: 1
   xrCameraRig: {fileID: 9084979575249559859}
   xrCamera: {fileID: 851861556801731630}
-  xrAudio: {fileID: 1522319961111883083}
+  xrAudio: {fileID: 6249533240787296671}
 --- !u!114 &3991798219389118461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,24 +323,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3257629882324441507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befbd2492ee5a4245acccf94e81bd6a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementUnified
-  ShowTopMostFoldoutHeaderGroup: 1
-  moveSpeed: 2.5
-  turnSpeed: 90
-  mouseSensitivity: 3
-  playerCamera: {fileID: 851861556801731630}
---- !u!114 &127988365950485041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3257629882324441507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befbd2492ee5a4245acccf94e81bd6a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c1b22e537e40b640bc165ffb4c185f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementUnified
   ShowTopMostFoldoutHeaderGroup: 1
@@ -416,7 +398,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 76c731a29840e0f4ab86c66c198711bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
