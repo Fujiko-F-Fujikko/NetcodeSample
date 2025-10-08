@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a175b38427add3a4598d2ebb2c0afc72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  address: 127.0.0.1
+  address: 192.168.19.192
   port: 7777
   width: 260
   lineH: 26
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 127.0.0.1
+    Address: 192.168.19.192
     Port: 7777
     ServerListenAddress: 127.0.0.1
   DebugSimulator:

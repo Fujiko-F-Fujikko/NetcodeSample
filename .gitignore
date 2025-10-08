@@ -1,6 +1,10 @@
-# Unity用 .gitignore テンプレート
-# ビルド成果物
-[Bb]in/
+# --- Unity must-track (絶対に追跡すべき) ---
+# ※ 他の .gitignore / グローバル設定で誤って無視されても打ち消す
+!**/*.meta
+!ProjectSettings/**
+!Packages/**
+
+# --- Unity generated / キャッシュ系 ---
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -8,55 +12,58 @@
 [Bb]uilds/
 [Ll]ogs/
 [Mm]emoryCaptures/
+[Bb]urstCache/
+[Uu]ser[Ss]ettings/            # 個人設定は通常コミットしない
 
-# ユーザー設定
-UserSettings/
+# --- ビルド成果物・一時 ---
+*.apk
+*.aab
+*.app
+*.xcworkspace/
+*.xcuserstate
+*.xcuserdatad
+*.ipa
+/Bin*/
 
-# Auto-generated VS/MD/VSCode files
+
+# --- Visual Studio / Rider / VSCode ---
+# 自動生成プロジェクトファイル（必要になったら再生成でOK）
 *.csproj
-*.unityproj
 *.sln
 *.suo
-*.tmp
 *.user
-*.userprefs
+*.unityproj
 *.pidb
-*.booproj
 *.svd
 *.pdb
 *.mdb
 *.opendb
 *.VC.db
-*.pidb.meta
+.vs/
+.idea/
+.vscode/
 
-# Unity Asset/Package管理
-/[Aa]ssets/**/*.asset
-/[Aa]ssets/**/*.asset.meta
-/[Aa]ssets/**/*.meta
-/[Pp]ackageCache/
-Packages/[Pp]ackages-lock.json
-
-# シーンバックアップ
-*.bak
-*.backup
-
-# Crash/Debug/Profiler
-*.stacktrace
+# --- そのほか一時ファイル ---
+*.tmp
 *.log
-*.dmp
-*.crash
-*.swp
-*.swo
 *.orig
 *.diff
-
-# Burst Compiler
-[Bb]urstCache/
-NetcodeSample_BurstDebugInformation_DoNotShip/
-
-# その他
+*.patch
+*.swp
+*.swo
 .DS_Store
 Thumbs.db
 
-# Visual Studio Code
-.vscode/
+# --- プラットフォーム別（必要に応じて） ---
+# Android / Gradle
+.gradle/
+*.gradle
+LocalProperties.xml
+.gradle/
+**/gradle-wrapper.jar
+
+# Xcode (iOS)
+DerivedData/
+*.xcworkspace/
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
