@@ -4,117 +4,68 @@ using UnityEngine;
 
 public class NGOHud : MonoBehaviour
 {
-  [Header("Transport")]
-  public string address = "127.0.0.1";
-  public ushort port = 7777;
+  string ip;
+  ushort port;
 
-  [Header("UI")]
-  public int width = 260;
-  public int lineH = 26;
-  public int pad = 10;
+  UnityTransport transport => NetworkManager.Singleton.GetComponent<UnityTransport>();
 
-  string _status = "OFFLINE";
-  string _reason = "";
-
-  void Start()
+  void Awake()
   {
-    var nm = NetworkManager.Singleton;
-    if (nm == null) { _status = "No NetworkManager"; return; }
-
-    // Transport 設定を反映
-    if (nm.NetworkConfig.NetworkTransport is UnityTransport utp)
-    {
-      utp.ConnectionData.Address = address;
-      utp.ConnectionData.Port = port;
-    }
-
-    // 状態変更イベント
-    nm.OnServerStarted += UpdateStatus;
-    nm.OnServerStopped += _ => UpdateStatus();
-    nm.OnClientConnectedCallback += _ => UpdateStatus();
-    nm.OnClientDisconnectCallback += _ =>
-    {
-      // 切断理由（NGO 2.x 以降）
-      _reason = string.IsNullOrEmpty(nm.DisconnectReason) ? "Unknown" : nm.DisconnectReason;
-      UpdateStatus();
-    };
-
-    UpdateStatus();
+    ip = PlayerPrefs.GetString("NGO_IP", "127.0.0.1");
+    port = (ushort)PlayerPrefs.GetInt("NGO_Port", 7777);
   }
 
-  void OnDestroy()
-  {
-    var nm = NetworkManager.Singleton;
-    if (nm == null) return;
-    nm.OnServerStarted -= UpdateStatus;
-    nm.OnServerStopped -= _ => UpdateStatus();
-    nm.OnClientConnectedCallback -= _ => UpdateStatus();
-    nm.OnClientDisconnectCallback -= _ => UpdateStatus();
-  }
-
-  void UpdateStatus()
-  {
-    var nm = NetworkManager.Singleton;
-    if (nm == null) { _status = "No NetworkManager"; return; }
-
-    if (!nm.IsClient && !nm.IsServer) { _status = "OFFLINE"; return; }
-
-    if (nm.IsHost) { _status = nm.IsListening ? "HOST (listening)" : "HOST (starting)"; return; }
-    if (nm.IsServer) { _status = nm.IsListening ? "SERVER (listening)" : "SERVER (starting)"; return; }
-
-    // Client
-    if (nm.IsConnectedClient) _status = $"CLIENT (connected) LocalId:{nm.LocalClientId}";
-    else _status = "CLIENT (connecting...)";
-  }
+  // 入力は使わないので Update は不要（削除してOK）
 
   void OnGUI()
   {
-    int x = pad, y = pad;
-    GUI.Box(new Rect(x - 6, y - 6, width + 12, 200), GUIContent.none);
-
-    GUI.Label(new Rect(x, y, width, lineH), $"Status: {_status}");
-    y += lineH + 4;
-    GUI.Label(new Rect(x, y, width, lineH), $"Addr: {address}:{port}");
-    y += lineH + 10;
+    const int w = 260;
+    GUILayout.BeginArea(new Rect(10, 10, w, 220), GUI.skin.box);
 
     var nm = NetworkManager.Singleton;
-    if (nm == null)
-    {
-      if (GUI.Button(new Rect(x, y, width, lineH), "No NetworkManager")) { }
-      return;
-    }
+    string status = "OFFLINE";
+    if (nm.IsHost) status = $"HOST  (localId:{nm.LocalClientId})";
+    else if (nm.IsServer) status = "SERVER (listening)";
+    else if (nm.IsClient) status = $"CLIENT (connected) localId:{nm.LocalClientId}";
+    GUILayout.Label($"Status: {status}");
 
-    // オフライン時：起動ボタン
-    if (!nm.IsClient && !nm.IsServer)
+    GUILayout.Space(6);
+    GUILayout.Label($"Addr: {ip}:{port}");
+    GUILayout.BeginHorizontal();
+    GUILayout.Label("IP", GUILayout.Width(25));
+    ip = GUILayout.TextField(ip, GUILayout.Width(130));
+    GUILayout.Label("Port", GUILayout.Width(35));
+    var portStr = GUILayout.TextField(port.ToString(), GUILayout.Width(50));
+    ushort.TryParse(portStr, out port);
+    GUILayout.EndHorizontal();
+
+    GUILayout.Space(6);
+
+    if (!nm.IsListening)
     {
-      if (GUI.Button(new Rect(x, y, width, lineH), "Start Host")) nm.StartHost();
-      y += lineH + 4;
-      if (GUI.Button(new Rect(x, y, width, lineH), "Start Client")) nm.StartClient();
-      y += lineH + 4;
-      if (GUI.Button(new Rect(x, y, width, lineH), "Start Server")) nm.StartServer();
-      y += lineH + 4;
+      if (GUILayout.Button("Start Host")) { ApplyConnection(ip, port, true); nm.StartHost(); }
+      if (GUILayout.Button("Start Client")) { ApplyConnection(ip, port, false); nm.StartClient(); }
+      if (GUILayout.Button("Start Server")) { ApplyConnection(ip, port, true); nm.StartServer(); }
     }
     else
     {
-      // オンライン時：停止/再試行
-      if (GUI.Button(new Rect(x, y, width, lineH), "Shutdown")) nm.Shutdown();
-      y += lineH + 6;
-
-      // Client で未接続 → 理由表示 + 再試行
-      if (nm.IsClient && !nm.IsConnectedClient)
-      {
-        if (!string.IsNullOrEmpty(_reason))
-        {
-          GUI.Label(new Rect(x, y, width, lineH), $"Last reason: {_reason}");
-          y += lineH + 4;
-        }
-        if (GUI.Button(new Rect(x, y, width, lineH), "Retry Connect"))
-        {
-          _reason = "";
-          nm.Shutdown();
-          nm.StartClient();
-        }
-      }
+      if (GUILayout.Button("Shutdown")) nm.Shutdown();
     }
+
+    GUILayout.EndArea();
+  }
+
+  void ApplyConnection(string addr, ushort prt, bool isServer)
+  {
+    PlayerPrefs.SetString("NGO_IP", addr);
+    PlayerPrefs.SetInt("NGO_Port", prt);
+    PlayerPrefs.Save();
+
+    if (transport == null) { Debug.LogError("UnityTransport not found."); return; }
+
+    if (isServer) transport.SetConnectionData("0.0.0.0", prt); // 全NICで待受け
+    else transport.SetConnectionData(addr, prt);      // 指定先に接続
+
+    Debug.Log($"[NGOHud] Set {addr}:{prt} (server={isServer})");
   }
 }
