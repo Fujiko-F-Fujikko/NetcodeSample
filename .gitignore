@@ -15,6 +15,8 @@
 [Bb]urstCache/
 # 個人設定は通常コミットしない
 [Uu]ser[Ss]ettings/
+# Unity temporary user session data
+.utmp/
 
 # --- ビルド成果物・一時 ---
 *.apk
