@@ -13,7 +13,8 @@
 [Ll]ogs/
 [Mm]emoryCaptures/
 [Bb]urstCache/
-[Uu]ser[Ss]ettings/            # 個人設定は通常コミットしない
+# 個人設定は通常コミットしない
+[Uu]ser[Ss]ettings/
 
 # --- ビルド成果物・一時 ---
 *.apk
