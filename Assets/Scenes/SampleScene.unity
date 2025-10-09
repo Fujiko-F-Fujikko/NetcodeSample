@@ -647,6 +647,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::KitchenSetSpawner
   ShowTopMostFoldoutHeaderGroup: 1
   kitchenPrefab: {fileID: 1359891116749786618, guid: af4218d074149bb4eae1a99218288088, type: 3}
+  spawnPosition: {x: 0, y: -10, z: 30}
+  spawnRotation: {x: 90, y: 0, z: 0}
+  spawnScale: {x: 0.1, y: 0.1, z: 0.1}
 --- !u!4 &1526400262
 Transform:
   m_ObjectHideFlags: 0

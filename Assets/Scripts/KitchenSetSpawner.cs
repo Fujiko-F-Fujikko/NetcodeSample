@@ -4,17 +4,15 @@ using UnityEngine;
 public class KitchenSetSpawner : NetworkBehaviour
 {
   [SerializeField] private NetworkObject kitchenPrefab; // Kitchen_set_net を割り当て
+  [SerializeField] private Vector3 spawnPosition = new Vector3(0f, 0f, 0f);
+  [SerializeField] private Vector3 spawnRotation = new Vector3(90f, 0f, 0f);
+  [SerializeField] private Vector3 spawnScale = new Vector3(1.0f, 1.0f, 1.0f);
 
   public override void OnNetworkSpawn()
   {
     if (!IsServer) return;
-
-    // 位置はお好みで
-    var spawnPos = new Vector3(0f, -10f, 30f);
-    var rot = new Vector3(90f, 0f, 0f);
-    var scale = new Vector3(0.1f, 0.1f, 0.1f);
-    var obj = Instantiate(kitchenPrefab, spawnPos, Quaternion.Euler(rot));
-    obj.transform.localScale = scale;
+    var obj = Instantiate(kitchenPrefab, spawnPosition, Quaternion.Euler(spawnRotation));
+    obj.transform.localScale = spawnScale;
     obj.Spawn(true); // 全クライアントへ出現
   }
 }
